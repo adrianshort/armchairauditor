@@ -126,4 +126,11 @@ tr
   margin: 15px 0;
   padding: 7px;
   background-color: red;
+  color: white;
+}
+
+.download a:hover
+{
+  background-color: #ccc;
+  color: red;
 }

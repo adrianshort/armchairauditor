@@ -6,27 +6,7 @@ require 'lib/models'
 
 
 get '/' do
-  @directorates = Directorate.all
-  
-#   @results = repository(:default).adapter.query("
-#     SELECT  p.name,
-#             sum(c.votes_2010) AS votes,
-#             p.colour 
-#             
-#     FROM    parties p,
-#             councilcandidates c 
-#             
-#     WHERE   p.id = c.party_id
-#     
-#     GROUP BY p.name, p.colour
-#     
-#     ORDER BY votes desc
-#   ;")
-
-# select p.name, count(c.*) AS seats
-# FROM parties p, councilcandidates c
-# GROUP BY p.id
-  
+  @directorates = Directorate.all( :order => ['name'] )
   haml :home
 end
 
