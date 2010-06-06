@@ -10,16 +10,16 @@ get '/' do
   haml :home
 end
 
-get '/directorates/:id' do
-  @directorate = Directorate.get(params[:id])
+get '/directorates/:slug' do
+  @directorate = Directorate.first(:slug => params[:slug])
   @total = @directorate.payments.sum(:amount)
   haml :directorate
 end
 
-get '/suppliers/:id.csv' do
-  @supplier = Supplier.get(params[:id])
+get '/suppliers/:slug.csv' do
+  @supplier = Supplier.first(:slug => params[:slug])
 
- headers "Content-Disposition" => "attachment;filename=supplier#{@supplier.id}.csv",
+ headers "Content-Disposition" => "attachment;filename=supplier-#{@supplier.slug}.csv",
     "Content-Type" => "application/octet-stream"
 
   result = "Date,Trans No,Directorate,Service,Amount ex. VAT\n"
@@ -32,8 +32,8 @@ get '/suppliers/:id.csv' do
   
 end
 
-get '/suppliers/:id' do
-  @supplier = Supplier.get(params[:id])
+get '/suppliers/:slug' do
+  @supplier = Supplier.first(:slug => params[:slug])
   @total = @supplier.payments.sum(:amount)
   haml :supplier
 end
@@ -43,10 +43,10 @@ get '/suppliers/?' do
   haml :suppliers
 end
 
-get '/services/:id.csv' do
-  @service = Service.get(params[:id])
+get '/services/:slug.csv' do
+  @service = Service.first(:slug => params[:slug])
 
- headers "Content-Disposition" => "attachment;filename=service#{@service.id}.csv",
+ headers "Content-Disposition" => "attachment;filename=service-#{@service.slug}.csv",
     "Content-Type" => "application/octet-stream"
 
   result = "Date,Trans No,Directorate,Supplier,Amount ex. VAT\n"
@@ -59,8 +59,8 @@ get '/services/:id.csv' do
   
 end
 
-get '/services/:id' do
-  @service = Service.get(params[:id])
+get '/services/:slug' do
+  @service = Service.first(:slug => params[:slug])
   @total = @service.payments.sum(:amount)
   haml :service
 end
@@ -68,17 +68,6 @@ end
 get '/services/?' do
   @services = Service.all( :order => ['name'] )
   haml :services
-end
-
-get '/wards/:slug/postcode/:postcode/?' do
-  @ward = Ward.first(:slug => params[:slug])
-  @postcode = params[:postcode]
-  haml :wards
-end
-
-get '/wards/:slug/?' do
-  @ward = Ward.first(:slug => params[:slug])
-  haml :wards
 end
 
 get '/error' do

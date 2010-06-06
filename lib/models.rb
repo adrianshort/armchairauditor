@@ -28,8 +28,14 @@ class Directorate
   
   property :id,   Serial
   property :name, String, :length => 255, :required => true
+  property :slug, String, :length => 255
   
   has n, :payments, :order => ['d']
+
+  def self.slugify(name)
+    name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  end
+
 end
 
 class Service
@@ -37,8 +43,14 @@ class Service
   
   property :id,   Serial
   property :name, String, :length => 255, :required => true
+  property :slug, String, :length => 255
   
   has n, :payments, :order => ['d']
+
+  def self.slugify(name)
+    name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  end
+  
 end
 
 class Supplier
@@ -46,12 +58,13 @@ class Supplier
   
   property :id,   Serial
   property :name, String, :length => 255, :required => true
+  property :slug, String, :length => 255
   
   has n, :payments, :order => ['d']
   
-#   def self.slugify(name)
-#     name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
-#   end
+  def self.slugify(name)
+    name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  end
 end
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db.sqlite3")

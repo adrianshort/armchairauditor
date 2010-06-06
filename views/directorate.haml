@@ -20,10 +20,10 @@
       %tr
         %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
         %td
-          %a{ :href => '/services/' + payment.service.id.to_s }
+          %a{ :href => '/services/' + payment.service.slug }
             = payment.service.name
         %td
-          %a{ :href => '/suppliers/' + payment.supplier.id.to_s }
+          %a{ :href => '/suppliers/' + payment.supplier.slug }
             = payment.supplier.name
         %td.right= sprintf("%0d", payment.amount)
     

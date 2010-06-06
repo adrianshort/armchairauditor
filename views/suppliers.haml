@@ -9,5 +9,5 @@
  
   - for supplier in @suppliers
     %p
-      %a{ :href=> "/suppliers/#{supplier.id}" }
+      %a{ :href=> "/suppliers/#{supplier.slug}" }
         = supplier.name

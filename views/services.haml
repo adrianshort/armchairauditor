@@ -9,5 +9,5 @@
  
   - for service in @services
     %p
-      %a{ :href=> "/services/#{service.id}" }
+      %a{ :href=> "/services/#{service.slug}" }
         = service.name

@@ -10,7 +10,7 @@
       = @supplier.name
 
   %p.noprint.download
-    %a{ :href => "/suppliers/#{@supplier.id}.csv" }
+    %a{ :href => "/suppliers/#{@supplier.slug}.csv" }
       Download data as CSV
   
   %table
@@ -24,10 +24,10 @@
       %tr
         %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
         %td
-          %a{ :href => '/directorates/' + payment.directorate.id.to_s }
+          %a{ :href => '/directorates/' + payment.directorate.slug }
             = payment.directorate.name
         %td
-          %a{ :href => '/services/' + payment.service.id.to_s }
+          %a{ :href => '/services/' + payment.service.slug }
             = payment.service.name
         %td.right= sprintf("%0d", payment.amount)
     
