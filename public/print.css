@@ -7,3 +7,9 @@ body
 {
   margin: 0 auto;
 }
+
+a, a:visited
+{
+  color: #000;
+  background-color: #fff;
+}

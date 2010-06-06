@@ -8,7 +8,7 @@
       %a{ :href => '/services' } Services
     %li
       = @service.name
-  %p
+  %p.noprint.download
     %a{ :href => "/services/#{@service.id}.csv" }
       Download data as CSV
             
