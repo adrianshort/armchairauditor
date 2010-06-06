@@ -1,0 +1,13 @@
+.grid_12
+  %h2 Suppliers
+  
+  %ul#breadcrumb
+    %li.home
+      %a{ :href => '/'} Home
+    %li
+      Suppliers
+ 
+  - for supplier in @suppliers
+    %p
+      %a{ :href=> "/suppliers/#{supplier.id}" }
+        = supplier.name

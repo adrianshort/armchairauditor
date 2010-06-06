@@ -1,0 +1,11 @@
+.grid_12
+
+  %ul#breadcrumb
+    %li.home
+    
+  %h2 Directorates
+      
+  - for directorate in @directorates
+    %p
+      %a{ :href=> "/directorates/#{directorate.id}" }
+        = directorate.name

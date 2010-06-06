@@ -1,0 +1,30 @@
+.grid_12
+  %h2= @page_title = @directorate.name + " Directorate"
+  
+  %ul#breadcrumb
+    %li.home
+      %a{ :href => '/'} Home
+    %li
+      %a{ :href => '/directorates' } Directorates
+    %li
+      = @directorate.name
+      
+  %table
+    %tr
+      %th Date
+      %th Service
+      %th Supplier
+      %th &pound;
+        
+    - for payment in @directorate.payments
+      %tr
+        %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
+        %td
+          %a{ :href => '/services/' + payment.service.id.to_s }
+            = payment.service.name
+        %td
+          %a{ :href => '/suppliers/' + payment.supplier.id.to_s }
+            = payment.supplier.name
+        %td.right= sprintf("%0d", payment.amount)
+    
+  

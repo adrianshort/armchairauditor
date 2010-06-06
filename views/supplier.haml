@@ -1,0 +1,34 @@
+.grid_12
+  %h2= @page_title = @supplier.name + " (Supplier)"
+
+  %ul#breadcrumb
+    %li.home
+      %a{ :href => '/'} Home
+    %li
+      %a{ :href => '/suppliers' } Suppliers
+    %li
+      = @supplier.name
+
+  %p.noprint
+    %a{ :href => "/suppliers/#{@supplier.id}.csv" }
+      Download data as CSV
+  
+  %table
+    %tr
+      %th Date
+      %th Directorate
+      %th Service
+      %th &pound;
+        
+    - for payment in @supplier.payments
+      %tr
+        %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
+        %td
+          %a{ :href => '/directorates/' + payment.directorate.id.to_s }
+            = payment.directorate.name
+        %td
+          %a{ :href => '/services/' + payment.service.id.to_s }
+            = payment.service.name
+        %td.right= sprintf("%0d", payment.amount)
+    
+  

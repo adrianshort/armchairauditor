@@ -1,0 +1,13 @@
+.grid_12
+  %h2 Services
+  
+  %ul#breadcrumb
+    %li.home
+      %a{ :href => '/'} Home
+    %li
+      Services
+ 
+  - for service in @services
+    %p
+      %a{ :href=> "/services/#{service.id}" }
+        = service.name

@@ -1,0 +1,55 @@
+.grid_9
+  %h1= @page_title = "About this website"
+  
+  %blockquote
+    The swift and simple changes we are calling for today [to encourage councils to publish spending data] will unleash an army of armchair auditors and quite rightly make those charged with doling out the pennies stop and think twice about whether they are getting value for money.
+    
+  %p.right &mdash; Eric Pickles, Communities &amp; Local Government Secretary, 5 June 2010
+  
+  <!-- http://news.bbc.co.uk/1/hi/politics/10241522.stm -->
+  
+  %p.vcard
+    This website was designed and written by 
+    %a.fn.url{ :href => 'http://adrianshort.co.uk' } Adrian Short
+    \.
+    You can contact me by email at 
+    %a.email{ :href => "mailto:adrian.short@gmail.com" } adrian.short@gmail.com
+    and 
+    %a.url{ :href => "http://twitter.com/adrianshort" } follow me on Twitter
+    \.
+    
+  %p.highlight
+    This site is made with 
+    %a{ :href => 'http://www.rbwm.gov.uk/web/finance_payments_to_suppliers.htm' }
+      the Royal Borough of Windsor and Maidenhead's spending data
+    and is entirely indepdendent of the council. The council did not commission or pay for this website.
+  
+  %p Every page on this website prints beautifully.
+  
+  %p
+    This site is written in 
+    %a{ :href => "http://www.ruby-lang.org/en/" }Ruby
+    \ using the 
+    %a{ :href => "http://www.sinatrarb.com/" }Sinatra framework.
+    
+  %p
+    The code for this website is 
+    %a{ :href => "http://github.com/adrianshort/Sutton-Elections" }open source and managed on Github.
+    It is hosted by 
+    %a{ :href => "http://heroku.com/" }Heroku.
+    
+  %p
+    The page templates use 
+    %a{ :href => "http://haml-lang.com/" }Haml
+    and SprySoft's 
+    %a{ :href => "http://www.spry-soft.com/grids/" }Variable Grid System
+    \. The database is 
+    %a{ :href => "http://www.sqlite.org/" }SQLite
+    for development and 
+    %a{ :href => "http://www.postgresql.org/" }PostgreSQL
+    for production, abstracted through 
+    %a{ :href => "http://datamapper.org/" }DataMapper.
+  %p  
+    Source control and deployment is done with 
+    %a{ :href => "http://git-scm.com/" }Git.
+

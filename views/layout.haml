@@ -1,0 +1,26 @@
+!!! XML
+!!!
+%html
+  %head
+    %title= @page_title ? @page_title + " - Armchair Auditor" : "Armchair Auditor"
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/style.css' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/breadcrumb/breadcrumb.css' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css', :media => 'print' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/grid.css' }
+
+  %body
+    .container_12
+      .grid_12
+        %h1 Royal Borough of Windsor &amp; Maidenhead Armchair Auditor
+      = yield
+      .clear  
+      #footer
+        .grid_12
+          %p
+            %a{ :href => '/' } Home
+          %p
+            %a{ :href => '/services' } Services
+          %p
+            %a{ :href => '/suppliers' } Suppliers
+          %p
+            %a{ :href => '/about' } About this website
