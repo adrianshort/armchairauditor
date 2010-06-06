@@ -32,6 +32,7 @@ end
 
 get '/directorates/:id' do
   @directorate = Directorate.get(params[:id])
+  @total = @directorate.payments.sum(:amount)
   haml :directorate
 end
 
@@ -53,6 +54,7 @@ end
 
 get '/suppliers/:id' do
   @supplier = Supplier.get(params[:id])
+  @total = @supplier.payments.sum(:amount)
   haml :supplier
 end
 
@@ -79,6 +81,7 @@ end
 
 get '/services/:id' do
   @service = Service.get(params[:id])
+  @total = @service.payments.sum(:amount)
   haml :service
 end
 
