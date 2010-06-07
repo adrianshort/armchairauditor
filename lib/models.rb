@@ -4,7 +4,7 @@ require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-aggregates'
 
-SITE_URL = 'http://armchairauditor.heroku.com/'
+SITE_URL = 'http://armchairauditor.co.uk/'
 
 class Payment
   include DataMapper::Resource
