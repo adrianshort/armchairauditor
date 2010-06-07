@@ -1,6 +1,4 @@
 .grid_12
-  %h2= @page_title = @supplier.name + " (Supplier)"
-
   %ul#breadcrumb
     %li.home
       %a{ :href => '/'} Home
@@ -8,6 +6,8 @@
       %a{ :href => '/suppliers' } Suppliers
     %li
       = @supplier.name
+
+  %h2= @page_title = @supplier.name + " (Supplier)"
 
   %p.noprint.download
     %a{ :href => "/suppliers/#{@supplier.slug}.csv" }
@@ -18,7 +18,7 @@
       %th Date
       %th Directorate
       %th Service
-      %th &pound;
+      %th.right &pound;
         
     - for payment in @supplier.payments
       %tr

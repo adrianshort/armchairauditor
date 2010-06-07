@@ -1,12 +1,12 @@
 .grid_12
-  %h2 Services
-  
   %ul#breadcrumb
     %li.home
       %a{ :href => '/'} Home
     %li
       Services
  
+  %h2= @page_title = "Services"
+  
   - for service in @services
     %p
       %a{ :href=> "/services/#{service.slug}" }

@@ -1,6 +1,4 @@
 .grid_12
-  %h2= @page_title = @service.name + " (Service)"
-  
   %ul#breadcrumb
     %li.home
       %a{ :href => '/'} Home
@@ -8,6 +6,9 @@
       %a{ :href => '/services' } Services
     %li
       = @service.name
+
+  %h2= @page_title = @service.name + " (Service)"
+  
   %p.noprint.download
     %a{ :href => "/services/#{@service.slug}.csv" }
       Download data as CSV
@@ -17,7 +18,7 @@
       %th Date
       %th Directorate
       %th Supplier
-      %th &pound;
+      %th.right &pound;
         
     - for payment in @service.payments
       %tr

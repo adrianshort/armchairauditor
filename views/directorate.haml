@@ -1,6 +1,4 @@
 .grid_12
-  %h2= @page_title = @directorate.name + " Directorate"
-  
   %ul#breadcrumb
     %li.home
       %a{ :href => '/'} Home
@@ -9,12 +7,14 @@
     %li
       = @directorate.name
       
+  %h2= @page_title = @directorate.name + " Directorate"
+  
   %table
     %tr
       %th Date
       %th Service
       %th Supplier
-      %th &pound;
+      %th.right &pound;
         
     - for payment in @directorate.payments
       %tr
