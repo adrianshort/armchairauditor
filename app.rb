@@ -22,10 +22,10 @@ get '/suppliers/:slug.csv' do
  headers "Content-Disposition" => "attachment;filename=supplier-#{@supplier.slug}.csv",
     "Content-Type" => "application/octet-stream"
 
-  result = "Date,Trans No,Directorate,Service,Amount ex. VAT\n"
+  result = "Date,Ref.,Trans No,Directorate,Service,Amount ex. VAT\n"
 
   for payment in @supplier.payments
-    result += "#{payment.d.strftime("%d %b %Y")},#{payment.trans_no},\"#{payment.directorate.name}\",#{payment.service.name},#{sprintf("%0.2f", payment.amount)}\n"
+    result += "#{payment.d.strftime("%d %b %Y")},#{payment.id},#{payment.trans_no},\"#{payment.directorate.name}\",#{payment.service.name},#{sprintf("%0.2f", payment.amount)}\n"
   end
 
   result
@@ -49,10 +49,10 @@ get '/services/:slug.csv' do
  headers "Content-Disposition" => "attachment;filename=service-#{@service.slug}.csv",
     "Content-Type" => "application/octet-stream"
 
-  result = "Date,Trans No,Directorate,Supplier,Amount ex. VAT\n"
+  result = "Date,Ref.,Trans No,Directorate,Supplier,Amount ex. VAT\n"
 
   for payment in @service.payments
-    result += "#{payment.d.strftime("%d %b %Y")},#{payment.trans_no},\"#{payment.directorate.name}\",#{payment.supplier.name},#{sprintf("%0.2f", payment.amount)}\n"
+    result += "#{payment.d.strftime("%d %b %Y")},#{payment.id},#{payment.trans_no},\"#{payment.directorate.name}\",#{payment.supplier.name},#{sprintf("%0.2f", payment.amount)}\n"
   end
 
   result
