@@ -4,6 +4,8 @@ require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-aggregates'
 
+SITE_URL = 'http://armchairauditor.heroku.com/'
+
 class Payment
   include DataMapper::Resource
   
@@ -20,6 +22,10 @@ class Payment
   belongs_to :directorate
   belongs_to :service
   belongs_to :supplier
+  
+  def url
+    SITE_URL + "payments/" + @id.to_s
+  end
 end
 
 
