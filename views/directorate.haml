@@ -12,6 +12,7 @@
   %table
     %tr
       %th Date
+      %th Ref.
       %th Service
       %th Supplier
       %th.right &pound;
@@ -19,6 +20,9 @@
     - for payment in @directorate.payments
       %tr
         %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
+        %td
+          %a{ :href => "/payments/#{payment.id}" }
+            = payment.id
         %td
           %a{ :href => '/services/' + payment.service.slug }
             = payment.service.name
@@ -33,5 +37,5 @@
       %td
         %strong TOTAL
       %td.right= sprintf("%0d", @total)
-      
+      %td
   

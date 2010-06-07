@@ -1,0 +1,33 @@
+.grid_12
+  %h2= @page_title = "Payment " + @payment.id.to_s
+  
+  %table
+    %tr
+      %td Date
+      %td= @payment.d.strftime("%d %b %Y")
+    %tr
+      %td Directorate
+      %td
+        %a{ :href => "/directorates/#{@payment.directorate.slug}" }
+          = @payment.directorate.name
+    %tr
+      %td Service
+      %td
+        %a{ :href => "/services/#{@payment.service.slug}" }
+          = @payment.service.name
+    %tr
+      %td Supplier
+      %td
+        %a{ :href => "/suppliers/#{@payment.supplier.slug}" }
+          = @payment.supplier.name
+    %tr
+      %td Amount &pound;
+      %td= sprintf("%0.2f", @payment.amount)
+    %tr
+      %td Transaction Number
+      %td= @payment.trans_no > 0 ? @payment.trans_no : "unknown"
+    %tr
+      %td Type
+      %td= @payment.tyype
+
+      

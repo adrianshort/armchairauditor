@@ -70,6 +70,11 @@ get '/services/?' do
   haml :services
 end
 
+get '/payments/:id' do
+  @payment = Payment.get(params[:id])
+  haml :payment
+end
+
 get '/error' do
   haml :error
 end
