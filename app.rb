@@ -6,6 +6,14 @@ require 'lib/models'
 
 get '/' do
   @directorates = Directorate.all( :order => ['name'] )
+#   @payments_count = Payment.all.size
+#   @suppliers_count = Supplier.all.size
+  @results = repository(:default).adapter.query("SELECT COUNT(*) FROM payments")
+  @payments_count = @results[0]
+  @results = repository(:default).adapter.query("SELECT COUNT(*) FROM suppliers")
+  @suppliers_count = @results[0]  
+  @results = repository(:default).adapter.query("SELECT COUNT(*) FROM services")
+  @services_count = @results[0]
   haml :home
 end
 
@@ -61,6 +69,11 @@ end
 get '/services/:slug' do
   @service = Service.first(:slug => params[:slug])
   @total = @service.payments.sum(:amount)
+  @count = @service.payments.size
+  @avg = @service.payments.avg(:amount)
+  @max = @service.payments.max(:amount)
+  @min = @service.payments.min(:amount)
+
   haml :service
 end
 

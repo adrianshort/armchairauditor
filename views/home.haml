@@ -1,11 +1,32 @@
 .grid_12
 
+-#
   %ul#breadcrumb
     %li.home
-    
+
+.clear
+
+.grid_6    
   %h2 Directorates
       
   - for directorate in @directorates
     %p
       %a{ :href=> "/directorates/#{directorate.slug}" }
         = directorate.name
+
+.grid_6
+  .callout
+    %p
+      Armchair Auditor lets you see how your council spends your money.
+    
+    %p
+      We've got 
+      = @payments_count
+      payments from 
+      %a{ :href => "/services" }
+        = @services_count
+        services
+      at the Royal Borough of Windsor and Maidenhead to
+      %a{ :href => "/suppliers" }
+        = @suppliers_count
+        suppliers.

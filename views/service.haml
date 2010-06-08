@@ -24,7 +24,7 @@
     - for payment in @service.payments
       %tr
         %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
-        %td
+        %td.right
           %a{ :href => "/payments/#{payment.id}" }
             = payment.id
         %td
@@ -42,5 +42,17 @@
       %td
         %strong TOTAL
       %td.right= sprintf("%0d", @total)
-      
+  
+  %table
+    %tr
+      %th.right Count
+      %th.right Max
+      %th.right Min
+      %th.right Average
+
+    %tr
+      %td.right= @count
+      %td.right= sprintf("%0d", @max)
+      %td.right= sprintf("%0d", @min)
+      %td.right= sprintf("%0d", @avg)
     

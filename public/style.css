@@ -134,3 +134,12 @@ tr
   background-color: #eee;
   color: red;
 }
+
+.callout
+{
+
+  background-color: beige;
+  padding: 0px;
+  font-size: 150%;
+  line-height: 1.5em;
+}
