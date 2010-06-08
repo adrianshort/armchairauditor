@@ -1,4 +1,5 @@
 require 'rubygems'
+gem "datamapper", "0.9.11"
 require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
@@ -79,6 +80,7 @@ class Supplier
   
   has n, :payments, :order => ['d']
   has n, :services, { :through => :payments, :order => ['name'] }
+  has n, :directorates, { :through => :payments }
   
   before :save, :slugify
 
