@@ -1,2 +1,2 @@
 sbfaulkner-sinatra-helpers -s http://gems.github.com
-dm-core --version '>= 1.0.0'
+datamapper --version '>= 1.0.0'
