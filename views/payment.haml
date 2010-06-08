@@ -23,9 +23,4 @@
     %tr
       %td Amount &pound;
       %td= sprintf("%0.2f", @payment.amount)
-    %tr
-      %td Transaction Number
-      %td= @payment.trans_no.nil? ? "unknown" : @payment.trans_no
-
-
       

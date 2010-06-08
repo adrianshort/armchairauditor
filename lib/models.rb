@@ -19,7 +19,7 @@ class Payment
   
   belongs_to :service
   belongs_to :supplier
-  has 1, :directorate, { :through => :service }
+  belongs_to :directorate, { :through => :service }
 
   def url
     SITE_URL + "payments/" + @id.to_s
