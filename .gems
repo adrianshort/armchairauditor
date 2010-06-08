@@ -1,2 +1,1 @@
 sbfaulkner-sinatra-helpers -s http://gems.github.com
-datamapper --version '0.10.1'
