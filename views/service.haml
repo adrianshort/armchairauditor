@@ -7,17 +7,40 @@
     %li
       = @service.name
 
-  %h2= @page_title = @service.name + " (Service)"
+  %h2= @page_title = @service.name
+  
+  %p
+    A service in the 
+    %a{ :href => '/directorates/' + @service.directorate.slug }
+      = @service.directorate.name
+      Directorate
+
   
   %p.noprint.download
     %a{ :href => "/services/#{@service.slug}.csv" }
       Download data as CSV
-            
+
+  %h3 Summary
+
+  %table
+    %tr
+      %th.right Payments
+      %th.right Max &pound;
+      %th.right Min &pound;
+      %th.right Average &pound;
+
+    %tr
+      %td.right= @count
+      %td.right= sprintf("%0d", @max)
+      %td.right= sprintf("%0d", @min)
+      %td.right= sprintf("%0d", @avg)            
+
+  %h3 Payments to Suppliers
+
   %table
     %tr
       %th Date
       %th Ref.
-      %th Directorate
       %th Supplier
       %th.right &pound;
         
@@ -28,9 +51,6 @@
           %a{ :href => "/payments/#{payment.id}" }
             = payment.id
         %td
-          %a{ :href => '/directorates/' + payment.directorate.slug }
-            = payment.directorate.name
-        %td
           %a{ :href => '/suppliers/' + payment.supplier.slug }
             = payment.supplier.name
         %td.right= sprintf("%0d", payment.amount)
@@ -39,20 +59,8 @@
       %td
       %td
       %td
-      %td
         %strong TOTAL
       %td.right= sprintf("%0d", @total)
   
-  %table
-    %tr
-      %th.right Count
-      %th.right Max
-      %th.right Min
-      %th.right Average
 
-    %tr
-      %td.right= @count
-      %td.right= sprintf("%0d", @max)
-      %td.right= sprintf("%0d", @min)
-      %td.right= sprintf("%0d", @avg)
     

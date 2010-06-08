@@ -19,7 +19,7 @@ end
 
 get '/directorates/:slug' do
   @directorate = Directorate.first(:slug => params[:slug])
-  @total = @directorate.payments.sum(:amount)
+#   @total = @directorate.payments.sum(:amount)
   haml :directorate
 end
 
@@ -42,6 +42,10 @@ end
 get '/suppliers/:slug' do
   @supplier = Supplier.first(:slug => params[:slug])
   @total = @supplier.payments.sum(:amount)
+  @count = @supplier.payments.size
+  @avg = @supplier.payments.avg(:amount)
+  @max = @supplier.payments.max(:amount)
+  @min = @supplier.payments.min(:amount)
   haml :supplier
 end
 

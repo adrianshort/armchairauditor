@@ -9,9 +9,31 @@
 
   %h2= @page_title = @supplier.name + " (Supplier)"
 
+  %p.noprint
+    %a{ :href => "http://www.google.co.uk/search?q=#{@supplier.name}" }
+      Search Google for
+      = @supplier.name
+
   %p.noprint.download
     %a{ :href => "/suppliers/#{@supplier.slug}.csv" }
       Download data as CSV
+
+  %h3 Summary 
+  
+  %table
+    %tr
+      %th.right Payments
+      %th.right Max &pound;
+      %th.right Min &pound;
+      %th.right Average &pound;
+
+    %tr
+      %td.right= @count
+      %td.right= sprintf("%0d", @max)
+      %td.right= sprintf("%0d", @min)
+      %td.right= sprintf("%0d", @avg) 
+      
+  %h3 Payments from the Council
   
   %table
     %tr

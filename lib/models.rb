@@ -10,19 +10,17 @@ class Payment
   include DataMapper::Resource
   
   property :id,             Serial
-  property :trans_no,       Integer,     :required => false # "TransNo" in RBWM CSV files
-  property :directorate_id, Integer,     :required => true
+  property :created_at,     DateTime
+  property :updated_at,     DateTime
   property :service_id,     Integer,     :required => true
   property :supplier_id,    Integer,     :required => true
-  property :cost_centre,    String,      :required => false
   property :amount,         BigDecimal,  :precision => 10, :scale => 2, :required => true # ex VAT
   property :d,              Date,        :required => true # "Updated" in RBWM CSV files
-  property :tyype,          String,      :required => true # Capital or Revenue
   
-  belongs_to :directorate
   belongs_to :service
   belongs_to :supplier
-  
+  has 1, :directorate, { :through => :service }
+
   def url
     SITE_URL + "payments/" + @id.to_s
   end
@@ -32,44 +30,60 @@ end
 class Directorate
   include DataMapper::Resource
   
-  property :id,   Serial
-  property :name, String, :length => 255, :required => true
-  property :slug, String, :length => 255
+  property :id,           Serial
+  property :created_at,   DateTime
+  property :updated_at,   DateTime
+  property :name,         String, :length => 255, :required => true
+  property :slug,         String, :length => 255
   
-  has n, :payments, :order => ['d']
+  has n, :payments, :through => :services, :order => ['d']
+  has n, :services, :order => ['name']
+  has n, :suppliers, :through => :services, :order => ['name']
 
-  def self.slugify(name)
-    name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  before :save, :slugify
+
+  def slugify
+    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
   end
-
 end
 
 class Service
   include DataMapper::Resource
   
-  property :id,   Serial
-  property :name, String, :length => 255, :required => true
-  property :slug, String, :length => 255
+  property :id,             Serial
+  property :created_at,     DateTime
+  property :updated_at,     DateTime
+  property :directorate_id, Integer,  :required => true
+  property :name,           String,   :length => 255, :required => true
+  property :slug,           String,   :length => 255
   
   has n, :payments, :order => ['d']
+  has n, :suppliers, :through => :payments, :order => ['name']
+  belongs_to :directorate
 
-  def self.slugify(name)
-    name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
-  end
-  
+  before :save, :slugify
+
+  def slugify
+    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  end 
 end
 
 class Supplier
   include DataMapper::Resource
   
-  property :id,   Serial
-  property :name, String, :length => 255, :required => true
-  property :slug, String, :length => 255
+  property :id,         Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
+  property :name,       String, :length => 255, :required => true
+  property :slug,       String, :length => 255
   
   has n, :payments, :order => ['d']
+  has n, :services, :through => :payments, :order => ['name']
   
-  def self.slugify(name)
-    name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  before :save, :slugify
+
+  def slugify
+    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
   end
 end
 
