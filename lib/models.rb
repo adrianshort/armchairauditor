@@ -36,9 +36,9 @@ class Directorate
   property :name,         String, :length => 255, :required => true
   property :slug,         String, :length => 255
   
-  has n, :payments, :through => :services, :order => ['d']
+  has n, :payments, { :through => :services, :order => ['d'] }
   has n, :services, :order => ['name']
-  has n, :suppliers, :through => :services, :order => ['name']
+  has n, :suppliers, { :through => :services, :order => ['name'] }
 
   before :save, :slugify
 
@@ -58,7 +58,7 @@ class Service
   property :slug,           String,   :length => 255
   
   has n, :payments, :order => ['d']
-  has n, :suppliers, :through => :payments, :order => ['name']
+  has n, :suppliers, { :through => :payments, :order => ['name'] }
   belongs_to :directorate
 
   before :save, :slugify
@@ -78,7 +78,7 @@ class Supplier
   property :slug,       String, :length => 255
   
   has n, :payments, :order => ['d']
-  has n, :services, :through => :payments, :order => ['name']
+  has n, :services, { :through => :payments, :order => ['name'] }
   
   before :save, :slugify
 
