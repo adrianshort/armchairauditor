@@ -39,8 +39,7 @@
     %tr
       %th Date
       %th Ref.
-      -#
-        %th Directorate
+      %th Directorate
       %th Service
       %th.right &pound;
         
@@ -50,18 +49,16 @@
         %td
           %a{ :href => "/payments/#{payment.id}" }
             = payment.id
-        -#
-          %td
-            %a{ :href => '/directorates/' + payment.directorate.slug }
-              = payment.directorate.name
+        %td
+          %a{ :href => '/directorates/' + payment.service.directorate.slug }
+            = payment.service.directorate.name
         %td
           %a{ :href => '/services/' + payment.service.slug }
             = payment.service.name
         %td.right= sprintf("%0d", payment.amount)
     
     %tr
-      -#
-        %td
+      %td
       %td
       %td
       %td
