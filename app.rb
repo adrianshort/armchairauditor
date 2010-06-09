@@ -6,8 +6,6 @@ require 'lib/models'
 
 get '/' do
   @directorates = Directorate.all( :order => ['name'] )
-#   @payments_count = Payment.all.size
-#   @suppliers_count = Supplier.all.size
   @results = repository(:default).adapter.query("SELECT COUNT(*) FROM payments")
   @payments_count = @results[0]
   @results = repository(:default).adapter.query("SELECT COUNT(*) FROM suppliers")
@@ -19,7 +17,6 @@ end
 
 get '/directorates/:slug' do
   @directorate = Directorate.first(:slug => params[:slug])
-#   @total = @directorate.payments.sum(:amount)
   haml :directorate
 end
 
@@ -29,10 +26,10 @@ get '/suppliers/:slug.csv' do
  headers "Content-Disposition" => "attachment;filename=supplier-#{@supplier.slug}.csv",
     "Content-Type" => "application/octet-stream"
 
-  result = "Date,Ref.,URL,Trans No,Directorate,Service,Amount ex. VAT\n"
+  result = "Date,Ref.,URL,Directorate,Service,Amount ex. VAT\n"
 
   for payment in @supplier.payments
-    result += "#{payment.d.strftime("%d %b %Y")},#{payment.id},#{payment.url},#{payment.trans_no},\"#{payment.directorate.name}\",#{payment.service.name},#{sprintf("%0.2f", payment.amount)}\n"
+    result += "#{payment.d.strftime("%d %b %Y")},#{payment.id},#{payment.url},\"#{payment.service.directorate.name}\",#{payment.service.name},#{sprintf("%0.2f", payment.amount)}\n"
   end
 
   result
@@ -60,10 +57,10 @@ get '/services/:slug.csv' do
  headers "Content-Disposition" => "attachment;filename=service-#{@service.slug}.csv",
     "Content-Type" => "application/octet-stream"
 
-  result = "Date,Ref.,URL,Trans No,Directorate,Supplier,Amount ex. VAT\n"
+  result = "Date,Ref.,URL,Directorate,Supplier,Amount ex. VAT\n"
 
   for payment in @service.payments
-    result += "#{payment.d.strftime("%d %b %Y")},#{payment.id},#{payment.url},#{payment.trans_no},\"#{payment.directorate.name}\",#{payment.supplier.name},#{sprintf("%0.2f", payment.amount)}\n"
+    result += "#{payment.d.strftime("%d %b %Y")},#{payment.id},#{payment.url},\"#{payment.service.directorate.name}\",#{payment.supplier.name},#{sprintf("%0.2f", payment.amount)}\n"
   end
 
   result
