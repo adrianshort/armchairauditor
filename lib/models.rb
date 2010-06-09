@@ -38,6 +38,7 @@ class Directorate
   
   has n, :services, :order => ['name']
   has n, :suppliers, { :through => :services, :order => ['name'] }
+  has n, :payments, { :through => :services }
 
   before :save, :slugify
 

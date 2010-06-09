@@ -5,12 +5,11 @@
     %tr
       %td Date
       %td= @payment.d.strftime("%d %b %Y")
-    -#
-      %tr
-        %td Directorate
-        %td
-          %a{ :href => "/directorates/#{@payment.directorate.slug}" }
-            = @payment.directorate.name
+    %tr
+      %td Directorate
+      %td
+        %a{ :href => "/directorates/#{@payment.directorate.slug}" }
+          = @payment.directorate.name
     %tr
       %td Service
       %td
