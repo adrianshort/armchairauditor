@@ -1,5 +1,4 @@
 require 'rubygems'
-# gem "datamapper", "0.9.11"
 require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
@@ -37,7 +36,6 @@ class Directorate
   property :name,         String, :length => 255, :required => true
   property :slug,         String, :length => 255
   
-#   has n, :payments, { :through => :services, :order => ['d'] }
   has n, :services, :order => ['name']
   has n, :suppliers, { :through => :services, :order => ['name'] }
 
