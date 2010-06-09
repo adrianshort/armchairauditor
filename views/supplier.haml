@@ -23,12 +23,14 @@
   %table
     %tr
       %th.right Payments
+      %th.right Total &pound;
       %th.right Max &pound;
       %th.right Min &pound;
       %th.right Average &pound;
 
     %tr
       %td.right= @count
+      %td.right= sprintf("%0d", @total)
       %td.right= sprintf("%0d", @max)
       %td.right= sprintf("%0d", @min)
       %td.right= sprintf("%0d", @avg) 
