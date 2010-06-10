@@ -93,6 +93,7 @@ strong
 table
 {
   border-collapse: collapse;
+  margin-bottom: 30px 0;
 }
 
 td, th
