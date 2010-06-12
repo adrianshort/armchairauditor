@@ -10,17 +10,18 @@
   
   %p.vcard
     This website was designed and written by 
-    %a.fn.url{ :href => 'http://adrianshort.co.uk' } Adrian Short
-    \.
+    %a.fn.url{ :href => 'http://adrianshort.co.uk' }<
+      Adrian Short.
     You can contact me by email at 
-    %a.email{ :href => "mailto:adrian.short@gmail.com" } adrian.short@gmail.com
+    %a.email{ :href => "mailto:adrian.short@gmail.com" }<
+      adrian.short@gmail.com
     and 
-    %a.url{ :href => "http://twitter.com/adrianshort" } follow me on Twitter
-    \.
+    %a.url{ :href => "http://twitter.com/adrianshort" }<
+      follow me on Twitter.
     
   %p.highlight
     This site is made with 
-    %a{ :href => 'http://www.rbwm.gov.uk/web/finance_payments_to_suppliers.htm' }
+    %a{ :href => 'http://www.rbwm.gov.uk/web/finance_payments_to_suppliers.htm' }<
       the Royal Borough of Windsor and Maidenhead's spending data
     and is entirely indepdendent of the council. The council did not commission or pay for this website.
   
@@ -28,28 +29,52 @@
   
   %p
     This site is written in 
-    %a{ :href => "http://www.ruby-lang.org/en/" }Ruby
-    \ using the 
-    %a{ :href => "http://www.sinatrarb.com/" }Sinatra framework.
+    %a{ :href => "http://www.ruby-lang.org/en/" }<
+      Ruby
+    using the 
+    %a{ :href => "http://www.sinatrarb.com/" }<
+      Sinatra framework.
     
   %p
     The code for this website is 
-    %a{ :href => "http://github.com/adrianshort/Armchair-Auditor" }open source and managed on Github.
+    %a{ :href => "http://github.com/adrianshort/Armchair-Auditor" }<
+      open source and managed on Github.
     It is hosted by 
-    %a{ :href => "http://heroku.com/" }Heroku.
+    %a{ :href => "http://heroku.com/" }<
+      Heroku.
     
   %p
     The page templates use 
-    %a{ :href => "http://haml-lang.com/" }Haml
+    %a{ :href => "http://haml-lang.com/" }<
+      Haml
     and SprySoft's 
-    %a{ :href => "http://www.spry-soft.com/grids/" }Variable Grid System
-    \. The database is 
-    %a{ :href => "http://www.sqlite.org/" }SQLite
+    %a{ :href => "http://www.spry-soft.com/grids/" }<
+      Variable Grid System.
+    The database is 
+    %a{ :href => "http://www.sqlite.org/" }<
+      SQLite
     for development and 
-    %a{ :href => "http://www.postgresql.org/" }PostgreSQL
+    %a{ :href => "http://www.postgresql.org/" }<
+      PostgreSQL
     for production, abstracted through 
-    %a{ :href => "http://datamapper.org/" }DataMapper.
+    %a{ :href => "http://datamapper.org/" }<
+      DataMapper.
   %p  
     Source control and deployment is done with 
-    %a{ :href => "http://git-scm.com/" }Git.
-
+    %a{ :href => "http://git-scm.com/" }<
+      Git.
+.clear
+<div class="grid_9">
+= haml_partial "comment_header"
+<div id="disqus_thread" class="noprint"></div>
+<script type="text/javascript">
+var disqus_developer = 1;
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = 'http://armchairauditor.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=armchairauditor">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink noprint">Comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
