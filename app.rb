@@ -6,7 +6,7 @@ require 'lib/models'
 
 helpers do
   def commify(amount)
-    amount.to_s.gsub(/(\d)(?=(\d{3})+$)/,'\1,')
+    amount.to_s.reverse.gsub(/(\d\d\d)(?=\d)(?!\d*\.)/,'\1,').reverse
   end
 end
 
