@@ -29,11 +29,11 @@
       %th.right Average &pound;
 
     %tr
-      %td.right= @count
-      %td.right= sprintf("%0d", @total)
-      %td.right= sprintf("%0d", @max)
-      %td.right= sprintf("%0d", @min)
-      %td.right= sprintf("%0d", @avg) 
+      %td.right= commify(@count)
+      %td.right= commify(sprintf("%0d", @total))
+      %td.right= commify(sprintf("%0d", @max))
+      %td.right= commify(sprintf("%0d", @min))
+      %td.right= commify(sprintf("%0d", @avg))
       
   %h3 Payments from the Council
   
@@ -57,7 +57,7 @@
         %td
           %a{ :href => '/services/' + payment.service.slug }
             = payment.service.name
-        %td.right= sprintf("%0d", payment.amount)
+        %td.right= commify(sprintf("%0d", payment.amount))
     
     %tr
       %td
@@ -65,7 +65,7 @@
       %td
       %td
         %strong TOTAL
-      %td.right= sprintf("%0d", @total)
+      %td.right= commify(sprintf("%0d", @total))
       
 .clear
 <div class="grid_9 noprint">

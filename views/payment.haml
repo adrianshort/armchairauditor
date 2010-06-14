@@ -22,7 +22,7 @@
           = @payment.supplier.name
     %tr
       %td Amount &pound;
-      %td= sprintf("%0.2f", @payment.amount)
+      %td= commify(sprintf("%0.2f", @payment.amount))
 .clear
 <div class="grid_9 noprint">
 = haml_partial "comment_header"

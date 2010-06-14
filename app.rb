@@ -4,6 +4,12 @@ require 'sinatra-helpers/haml/partials'
 require 'haml'
 require 'lib/models'
 
+helpers do
+  def commify(amount)
+    amount.to_s.gsub(/(\d)(?=(\d{3})+$)/,'\1,')
+  end
+end
+
 get '/' do
   @directorates = Directorate.all( :order => ['name'] )
   @results = repository(:default).adapter.query("SELECT COUNT(*) FROM payments")
@@ -65,6 +71,12 @@ get '/services/:slug.csv' do
 
   result
   
+end
+
+get '/services/:slug.json' do
+  @service = Service.first(:slug => params[:slug])
+  headers "Content-Type" => "application/json"
+  @service.to_json(:relationships => { :payments => { :include => :all }, :directorate => { :include => :all } })
 end
 
 get '/services/:slug' do

@@ -34,11 +34,11 @@
       %th.right Average
 
     %tr
-      %td.right= @count
-      %td.right= sprintf("&pound;%0d", @total)
-      %td.right= sprintf("&pound;%0d", @max)
-      %td.right= sprintf("&pound;%0d", @min)
-      %td.right= sprintf("&pound;%0d", @avg)      
+      %td.right= commify(@count)
+      %td.right= commify(sprintf("&pound;%0d", @total))
+      %td.right= commify(sprintf("&pound;%0d", @max))
+      %td.right= commify(sprintf("&pound;%0d", @min))
+      %td.right= commify(sprintf("&pound;%0d", @avg))
 
   %p
   
@@ -54,7 +54,7 @@
         %td
           %a{ :href => "/suppliers/#{row['supplier_slug']}" }
             = row['supplier_name']
-        %td.right= sprintf("%0d", row['total'])
+        %td.right= commify(sprintf("%0d", row['total']))
         %td.right= sprintf("%0.1f", row['total'] / @total * 100)
 
   %p
@@ -77,14 +77,14 @@
         %td
           %a{ :href => '/suppliers/' + payment.supplier.slug }
             = payment.supplier.name
-        %td.right= sprintf("%0d", payment.amount)
+        %td.right= commify(sprintf("%0d", payment.amount))
     
     %tr
       %td
       %td
       %td
         %strong TOTAL
-      %td.right= sprintf("%0d", @total)
+      %td.right= commify(sprintf("%0d", @total))
   
 .clear
 <div class="grid_9 noprint">
