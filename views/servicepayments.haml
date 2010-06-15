@@ -9,7 +9,7 @@
         = @service.name
     %li Payments to Suppliers
 
-  %h2= @page_title = @service.name
+  %h2= @page_title = "#{@service.name}: Payments to Suppliers"
   
   %p
     A service in the 
@@ -26,12 +26,6 @@
     %a{ :href => "/services/#{@service.slug}/payments.csv" }
       Download data as CSV
       
-.clear
-
-.grid_9 
-  
-  %h3 Payments to Suppliers
-
   %table
     %tr
       %th Date
