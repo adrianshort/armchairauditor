@@ -57,7 +57,7 @@ get '/suppliers/?' do
   haml :suppliers
 end
 
-get '/services/:slug.csv' do
+get '/services/:slug/payments.csv' do
   @service = Service.first(:slug => params[:slug])
 
  headers "Content-Disposition" => "attachment;filename=service-#{@service.slug}.csv",
@@ -97,6 +97,14 @@ get '/services/:slug' do
 
   haml :service
 end
+
+get '/services/:slug/payments' do
+  @service = Service.first(:slug => params[:slug])
+  @total = @service.payments.sum(:amount)
+  haml :servicepayments
+end
+
+
 
 get '/services/?' do
   @services = Service.all( :order => ['name'] )

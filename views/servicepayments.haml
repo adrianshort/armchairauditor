@@ -5,7 +5,9 @@
     %li
       %a{ :href => '/services' } Services
     %li
-      = @service.name
+      %a{ :href => "/services/#{@service.slug}" }
+        = @service.name
+    %li Payments to Suppliers
 
   %h2= @page_title = @service.name
   
@@ -16,46 +18,44 @@
       Directorate
 
   %p.noprint
-    %a{ :href => "/services/#{@service.slug}/payments" }
-      Payments to Suppliers details for
+    %a{ :href => "/services/#{@service.slug}" }
+      &laquo; Suppliers by Spend summary for
       = @service.name
-      &raquo;
-
+  
+  %p.noprint.download
+    %a{ :href => "/services/#{@service.slug}/payments.csv" }
+      Download data as CSV
+      
 .clear
 
 .grid_9 
-
-  %h3 Summary
-
-  %table
-    %tr
-      %th.right Payments
-      %th.right Total
-      %th.right Max
-      %th.right Min
-      %th.right Average
-
-    %tr
-      %td.right= commify(@count)
-      %td.right= commify(sprintf("&pound;%0d", @total))
-      %td.right= commify(sprintf("&pound;%0d", @max))
-      %td.right= commify(sprintf("&pound;%0d", @min))
-      %td.right= commify(sprintf("&pound;%0d", @avg))
   
-  %h3 Suppliers by Spend
-      
+  %h3 Payments to Suppliers
+
   %table
     %tr
+      %th Date
+      %th Ref.
       %th Supplier
-      %th Total &pound;
-      %th Total %
-    - for row in @results
+      %th.right &pound;
+        
+    - for payment in @service.payments
       %tr
+        %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
+        %td.right
+          %a{ :href => "/payments/#{payment.id}" }
+            = payment.id
         %td
-          %a{ :href => "/suppliers/#{row['supplier_slug']}" }
-            = row['supplier_name']
-        %td.right= commify(sprintf("%0d", row['total']))
-        %td.right= sprintf("%0.1f", row['total'] / @total * 100)
+          %a{ :href => '/suppliers/' + payment.supplier.slug }
+            = payment.supplier.name
+        %td.right= commify(sprintf("%0d", payment.amount))
+    
+    %tr
+      %td
+      %td
+      %td
+        %strong TOTAL
+      %td.right= commify(sprintf("%0d", @total))
   
 .clear
 <div class="grid_9 noprint">
