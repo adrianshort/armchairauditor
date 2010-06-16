@@ -98,8 +98,17 @@ get '/services/:slug' do
 end
 
 get '/services/:slug/payments' do
+  @FILTER_VALUES = %w[ 500 1000 2500 5000 10000 ]
   @service = Service.first(:slug => params[:slug])
-  @payments = Payment.all(:service_id => @service.id, :amount.gte => PAYMENTS_FILTER_MIN, :order => [ 'd' ])
+  # payments_filter_min cookie persists user selection of filter value
+  unless @min = request.cookies["payments_filter_min"]
+    @min = PAYMENTS_FILTER_MIN
+    response.set_cookie(
+      "payments_filter_min",
+      { :value => @min, :expires => Time.now + (60 * 24 * 60 * 60) }
+    )  # 60 days
+  end
+  @payments = Payment.all(:service_id => @service.id, :amount.gte => @min, :order => [ 'd' ])
   @total = @payments.sum(:amount)
   haml :servicepayments
 end

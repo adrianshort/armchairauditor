@@ -20,12 +20,3 @@
     %p
       %a{ :href => "/services/#{service.slug}" }
         = service.name
-
-.grid_6
-
-  %h3 Suppliers 
-
-  - for supplier in @directorate.suppliers
-    %p
-      %a{ :href => "/suppliers/#{supplier.slug}" }
-        = supplier.name  

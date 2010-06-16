@@ -4,10 +4,12 @@
   %head
     %title= @page_title ? @page_title + " - Armchair Auditor" : "Armchair Auditor"
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/style.css' }
-    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/breadcrumb/breadcrumb.css' }
+    -#
+      %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/breadcrumb/breadcrumb.css' }
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css', :media => 'print' }
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/grid.css' }
     %script{:type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'}
+    %script{:type => 'text/javascript', :src => '/js/jquery.cookie.js'}
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-3042981-18']);
@@ -23,19 +25,21 @@
   %body
     .container_12
       .grid_12
-        %p.highlight This is a demonstration website of &quot;alpha&quot; quality &mdash; don't rely on this data.
-        %h1 Royal Borough of Windsor &amp; Maidenhead Armchair Auditor
+        %p.highlight.hidden This is a demonstration website of &quot;alpha&quot; quality &mdash; don't rely on this data.
+        %h1.logo
+          Armchair Auditor
+          %span{ :style => "color: #777; font-size: 60%; padding-left: 20px;" }
+            Royal Borough of Windsor &amp; Maidenhead Spending
+        #nav.noprint
+          %a{ :href => '/' } Home
+          %a{ :href => '/services' } Services
+          %a{ :href => '/suppliers' } Suppliers
+          %a{ :href => '/about' } About
       = yield
       .clear  
       #footer
-        .grid_12
+        .grid_12.top_border
           %p
-            %a{ :href => '/' } Home
-          %p
-            %a{ :href => '/services' } Services
-          %p
-            %a{ :href => '/suppliers' } Suppliers
-          %p
-            %a{ :href => '/about' } About this website
-          %p
-            %a{ :href => 'http://adrianshort.co.uk/' } Designed by Adrian Short
+            An independent website 
+            %a{ :href => 'http://adrianshort.co.uk/' }
+              designed by Adrian Short

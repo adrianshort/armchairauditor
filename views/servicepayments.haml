@@ -6,6 +6,7 @@
     $('.spinner').hide()
     $('.filter a').removeClass('filter_selected');
     $(objj).addClass('filter_selected');
+    $.cookie("payments_filter_min", min, { expires: 60, path: '/' }); /* expires in n days */
     });
   }
 
@@ -46,37 +47,33 @@
       Download data as CSV
 
   .noprint
-    %p
-      Show payments over:&nbsp;&nbsp;
-      %img.spinner{ :src => "/spinner.gif" } <!-- Thanks, http://ajaxload.info/ -->
-      
     %p.filter
-      %a#min500{:href => '#'}
-        &pound;500
-      %a#min1000.filter_selected{:href => '#'}
-        &pound;1,000
-      %a#min2500{:href => '#'}
-        &pound;2,500
-      %a#min5000{:href => '#'}
-        &pound;5,000
-      %a#min10000{:href => '#'}
-        &pound;10,000
+      Show payments over
+          
+      - for v in @FILTER_VALUES
+        - @min.to_i == v.to_i ? klass = "filter_selected" : klass = ""
+        %a{ :href => '#', :id => "min" + v.to_s, :class => klass }
+          = "&pound;" + commify(v)
+
+      &nbsp;&nbsp;
+      %img.spinner{ :src => "/spinner.gif" } <!-- Thanks, http://ajaxload.info/ -->
+
 
   #payments= haml :servicepaymentsdetail, :layout => false
   
 .clear
-
-<div class="grid_9 noprint">
-= haml_partial "comment_header"
-<div id="disqus_thread" class="noprint"></div>
-<script type="text/javascript">
-var disqus_developer = 1;
-(function() {
-var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-dsq.src = 'http://armchairauditor.disqus.com/embed.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=armchairauditor">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink noprint">Comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+-#
+  <div class="grid_9 noprint">
+  = haml_partial "comment_header"
+  <div id="disqus_thread" class="noprint"></div>
+  <script type="text/javascript">
+  var disqus_developer = 1;
+  (function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'http://armchairauditor.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=armchairauditor">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink noprint">Comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>

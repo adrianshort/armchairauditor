@@ -7,7 +7,7 @@
 .clear
 
 .grid_6    
-  %h2 Directorates
+  %h2 Council Directorates
       
   - for directorate in @directorates
     %p
@@ -15,18 +15,63 @@
         = directorate.name
 
 .grid_6
-  .callout
+  .callout{ :style => "padding: 5px 30px;" }
     %p
       Armchair Auditor lets you see how your council spends your money.
     
     %p
-      We've got 
-      = @payments_count
-      payments from 
-      %a{ :href => "/services" }
-        = @services_count
-        services
-      at the Royal Borough of Windsor and Maidenhead to
-      %a{ :href => "/suppliers" }
-        = @suppliers_count
-        suppliers.
+      For the Royal Borough of Windsor and Maidenhead we've got:
+    %ul
+      %li
+        %a{ :href => "/services" }
+          = commify(@services_count)
+          services
+      %li
+        %a{ :href => "/suppliers" }
+          = commify(@suppliers_count)
+          suppliers
+      %li
+        = commify(@payments_count)
+        payments         
+.clear
+
+.grid_3.home_subheads
+  %h3
+    Big picture,
+    %br
+    small details
+
+.grid_3.home_subheads
+  %h3 Talk about it
+
+.grid_3.home_subheads
+  %h3 Open data
+  
+.grid_3.home_subheads
+  %h3 Open source
+  
+.clear
+
+.grid_3
+  %p Sometimes you want a high-level view of how much money is being spent by each council service or paid to each supplier. Other times you want to examine the details right down to individual payments. 
+  
+  %p Armchair Auditor lets you do both.  
+
+.grid_3
+  %p Armchair Auditor doesn't just let you see how your council spends its money &mdash; it lets you talk about it too. 
+  
+  %p There's a comments thread for every council service, supplier and even each individual payment so you can add more information and your opinions.  
+
+.grid_3
+  %p Open data is free for you to use in any way you choose. Armchair Auditor lets you download your council's spending data into an Excel spreadsheet and any other program that can read CSV files.
+
+  %p Every page prints beautifully, too.
+  
+.grid_3
+  %p If you want to use Armchair Auditor's software to publish your own council's data, it's free. Or you can use it as the starting point for your own custom project.
+  %p
+    %a{ :href => "http://github.com/adrianshort/Armchair-Auditor" }
+      Get the code on Github.
+   
+
+
