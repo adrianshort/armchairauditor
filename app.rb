@@ -4,6 +4,8 @@ require 'sinatra-helpers/haml/partials'
 require 'haml'
 require 'lib/models'
 
+PAYMENTS_FILTER_MIN = 1000
+
 helpers do
   def commify(amount)
     amount.to_s.reverse.gsub(/(\d\d\d)(?=\d)(?!\d*\.)/,'\1,').reverse
@@ -12,12 +14,9 @@ end
 
 get '/' do
   @directorates = Directorate.all( :order => ['name'] )
-  @results = repository(:default).adapter.query("SELECT COUNT(*) FROM payments")
-  @payments_count = @results[0]
-  @results = repository(:default).adapter.query("SELECT COUNT(*) FROM suppliers")
-  @suppliers_count = @results[0]  
-  @results = repository(:default).adapter.query("SELECT COUNT(*) FROM services")
-  @services_count = @results[0]
+  @payments_count = Payment.count
+  @suppliers_count = Supplier.count 
+  @services_count = Service.count
   haml :home
 end
 
@@ -45,7 +44,7 @@ end
 get '/suppliers/:slug' do
   @supplier = Supplier.first(:slug => params[:slug])
   @total = @supplier.payments.sum(:amount)
-  @count = @supplier.payments.size
+  @count = @supplier.payments.size # Payment.count(:supplier_id => @supplier.id) ?
   @avg = @supplier.payments.avg(:amount)
   @max = @supplier.payments.max(:amount)
   @min = @supplier.payments.min(:amount)
@@ -100,14 +99,14 @@ end
 
 get '/services/:slug/payments' do
   @service = Service.first(:slug => params[:slug])
-  @payments = Payment.all(:service_id => @service.id, :amount.gte => 0, :order => [ 'd' ])
+  @payments = Payment.all(:service_id => @service.id, :amount.gte => PAYMENTS_FILTER_MIN, :order => [ 'd' ])
   @total = @payments.sum(:amount)
   haml :servicepayments
 end
 
 get '/services/:slug/paymentsdetail' do
   @service = Service.first(:slug => params[:slug])
-  min = 500
+  min = PAYMENTS_FILTER_MIN
   if params[:min].to_i > 0
     min = params[:min].to_i
   end
