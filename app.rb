@@ -100,10 +100,21 @@ end
 
 get '/services/:slug/payments' do
   @service = Service.first(:slug => params[:slug])
-  @total = @service.payments.sum(:amount)
+  @payments = Payment.all(:service => @service, :amount.gte => 0, :order => 'd')
+  @total = @payments.sum(:amount)
   haml :servicepayments
 end
 
+get '/services/:slug/paymentsdetail' do
+  @service = Service.first(:slug => params[:slug])
+  min = 500
+  if params[:min].to_i > 0
+    min = params[:min].to_i
+  end
+  @payments = Payment.all(:service => @service, :amount.gte => min, :order => 'd')
+  @total = @payments.sum(:amount)
+  haml :servicepaymentsdetail, :layout => false
+end
 
 
 get '/services/?' do

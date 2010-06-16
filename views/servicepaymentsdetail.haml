@@ -1,0 +1,24 @@
+%table
+  %tr
+    %th Date
+    %th Ref.
+    %th Supplier
+    %th.right &pound;
+      
+  - for payment in @payments
+    %tr
+      %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
+      %td.right
+        %a{ :href => "/payments/#{payment.id}" }
+          = payment.id
+      %td
+        %a{ :href => '/suppliers/' + payment.supplier.slug }
+          = payment.supplier.name
+      %td.right= commify(sprintf("%0d", payment.amount))
+        
+  %tr
+    %td
+    %td
+    %td
+      %strong TOTAL
+    %td.right= commify(sprintf("%0d", @total))

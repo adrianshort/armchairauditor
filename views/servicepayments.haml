@@ -1,3 +1,22 @@
+:javascript
+  function getPayments(min, objj) {
+    $('.spinner').show()
+    $.get("/services/#{@service.slug}/paymentsdetail", { min: min }, function(data) {
+      $('#payments').html(data);
+    $('.spinner').hide()
+    $('.filter a').removeClass('filter_selected');
+    $(objj).addClass('filter_selected');
+    });
+  }
+
+  $(function(){
+    $('#min500').click(function() { getPayments(500, $(this)); return false; });
+    $('#min1000').click(function() { getPayments(1000, $(this)); return false; });
+    $('#min2500').click(function() { getPayments(2500, $(this)); return false; });
+    $('#min5000').click(function() { getPayments(5000, $(this)); return false; });
+    $('#min10000').click(function() { getPayments(10000, $(this)); return false; });
+  });
+
 .grid_12
   %ul#breadcrumb
     %li.home
@@ -8,7 +27,7 @@
       %a{ :href => "/services/#{@service.slug}" }
         = @service.name
     %li Payments to Suppliers
-
+  
   %h2= @page_title = "#{@service.name}: Payments to Suppliers"
   
   %p
@@ -25,45 +44,39 @@
   %p.noprint.download
     %a{ :href => "/services/#{@service.slug}/payments.csv" }
       Download data as CSV
+
+  .noprint
+    %p
+      Show payments over:&nbsp;&nbsp;
+      %img.spinner{ :src => "/spinner.gif" } <!-- Thanks, http://ajaxload.info/ -->
       
-  %table
-    %tr
-      %th Date
-      %th Ref.
-      %th Supplier
-      %th.right &pound;
-        
-    - for payment in @service.payments
-      %tr
-        %td= payment.d.strftime("%d&nbsp;%b&nbsp;%Y")
-        %td.right
-          %a{ :href => "/payments/#{payment.id}" }
-            = payment.id
-        %td
-          %a{ :href => '/suppliers/' + payment.supplier.slug }
-            = payment.supplier.name
-        %td.right= commify(sprintf("%0d", payment.amount))
-    
-    %tr
-      %td
-      %td
-      %td
-        %strong TOTAL
-      %td.right= commify(sprintf("%0d", @total))
+    %p.filter
+      %a#min500.filter_selected{:href => '#'}
+        &pound;500
+      %a#min1000{:href => '#'}
+        &pound;1,000
+      %a#min2500{:href => '#'}
+        &pound;2,500
+      %a#min5000{:href => '#'}
+        &pound;5,000
+      %a#min10000{:href => '#'}
+        &pound;10,000
+
+  #payments= haml :servicepaymentsdetail, :layout => false
   
 .clear
-<div class="grid_9 noprint">
-= haml_partial "comment_header"
-<div id="disqus_thread" class="noprint"></div>
-<script type="text/javascript">
-var disqus_developer = 1;
-(function() {
-var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-dsq.src = 'http://armchairauditor.disqus.com/embed.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=armchairauditor">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink noprint">Comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
-    
+-#
+  <div class="grid_9 noprint">
+  = haml_partial "comment_header"
+  <div id="disqus_thread" class="noprint"></div>
+  <script type="text/javascript">
+  var disqus_developer = 1;
+  (function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'http://armchairauditor.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=armchairauditor">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink noprint">Comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
