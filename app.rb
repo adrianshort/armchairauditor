@@ -98,7 +98,7 @@ get '/services/:slug' do
 end
 
 get '/services/:slug/payments' do
-  @FILTER_VALUES = %w[ 500 1000 2500 5000 10000 ]
+  @FILTER_VALUES = %w[ 500 1000 2500 5000 10000 20000 ]
   @service = Service.first(:slug => params[:slug])
   # payments_filter_min cookie persists user selection of filter value
   unless @min = request.cookies["payments_filter_min"]
