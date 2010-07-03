@@ -1,1 +1,6 @@
 sbfaulkner-sinatra-helpers -s http://gems.github.com
+dm-core
+dm-validations
+dm-timestamps
+dm-aggregates
+dm-serializer
