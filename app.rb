@@ -147,6 +147,30 @@ get '/about' do
   haml :about
 end
 
+get '/scoreboard.csv' do
+  @councils = Council.all( :order => ['name'] )
+  labels = %w[
+    id
+    created_at
+    updated_at
+    name
+    slug
+    url
+    data_url
+    open_licence
+    machine_readable
+    start_d
+    end_d
+  ]
+  headers "Content-Disposition" => "attachment;filename=armchair-auditor-scoreboard.csv",
+    "Content-Type" => "text/csv"
+  output = ""
+  for council in @councils
+    output += council.to_csv
+  end
+  labels.join(',') + "\n" + output
+end
+
 get '/scoreboard' do
   @councils = Council.all( :order => ['name'] )
   haml :scoreboard

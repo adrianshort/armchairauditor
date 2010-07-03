@@ -100,7 +100,6 @@ class Council
   property :data_url,         String,   :length => 512
   property :open_licence,     Boolean,  :default => false
   property :machine_readable, Boolean,  :default => false
-  property :grade,            String,   :length => 1
   property :start_d,          Date
   property :end_d,            Date 
   
