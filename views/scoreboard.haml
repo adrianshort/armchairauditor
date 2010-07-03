@@ -1,9 +1,9 @@
 .grid_12
   %h2= @page_title = "Council Spending Data Scoreboard"
-  -#
-    %p.noprint.download
-      %a{ :href => "/scoreboard.csv" }
-        Download data as CSV
+
+  %p.noprint.download
+    %a{ :href => "/scoreboard.csv" }
+      Download data as CSV
 
   %table
     %tr
@@ -29,23 +29,22 @@
         %td= council.end_d.strftime("%b %Y")        
         %td= council.updated_at.strftime("%d %b %Y")
   
-  -#
-    %p.highlight.noprint
-      This scoreboard data is free for you to use according to the
-      %a{ :href => "http://creativecommons.org/licenses/by/3.0/"}<
-        Creative Commons Attribution 3.0 Unported Licence.
-      Please credit to 
-      %strong
-        Adrian Short/Armchair Auditor
-      and link back to
-      %a{ :href => "http://armchairauditor.co.uk/scoreboard" }<
-        http://armchairauditor.co.uk/scoreboard
-      where possible.
+  %p.highlight.noprint
+    This scoreboard data is free for you to use according to the
+    %a{ :href => "http://creativecommons.org/licenses/by/3.0/"}<
+      Creative Commons Attribution 3.0 Unported Licence.
+    Please credit to 
+    %strong
+      Adrian Short/Armchair Auditor
+    and link back to
+    %a{ :href => "http://armchairauditor.co.uk/scoreboard" }<
+      http://armchairauditor.co.uk/scoreboard
+    where possible.
   
   %h3 Notes
   
   %p
-    If your council is publishing spending data please be aware of the guidance from the 
+    If your council is publishing spending data please be aware of the guidance from  
     %a{ :href => "http://opengovernmentdata.org/finances/"}<
       Open Government Data
     and the

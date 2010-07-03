@@ -166,7 +166,7 @@ get '/scoreboard.csv' do
     "Content-Type" => "text/csv"
   output = ""
   for council in @councils
-    output += council.to_csv
+    output += "#{council.id},#{council.created_at.strftime("%d %b %Y")},#{council.updated_at.strftime("%d %b %Y")},#{council.name},#{council.slug},#{council.url},#{council.data_url},#{council.open_licence},#{council.machine_readable},#{council.start_d.strftime("%d %b %Y")},#{council.end_d.strftime("%d %b %Y")}\n"
   end
   labels.join(',') + "\n" + output
 end
