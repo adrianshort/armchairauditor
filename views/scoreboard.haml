@@ -24,3 +24,55 @@
         %td= council.start_d.strftime("%b %Y")        
         %td= council.end_d.strftime("%b %Y")        
         %td= council.updated_at.strftime("%d %b %Y")
+        
+  %h3 Notes
+  
+  %p
+    If your council is publishing spending data please be aware of the guidance from the 
+    %a{ :href => "http://opengovernmentdata.org/finances/"}<
+      Open Government Data
+    and the
+    %a{ :href => "http://data.gov.uk/blog/publishing-itemised-local-authority-expenditure-advice-comment"}<
+      Local Public Data Panel.
+    You can ask questions and get support in the 
+    %a{ :href => "http://www.communities.idea.gov.uk/c/3916997/home.do" }<
+      Local Open Data Community
+    on Communities of Practice for Local Government (approved registration required.)
+  
+  %table
+    %tr
+      %td.strong Data URL
+      %td
+        A web page that links to the various downloadable data files.
+    %tr
+      %td.strong Open licence?
+      %td
+        If Yes, the council is explicitly stating an open licence which allows people to use and republish the data, including for commercial purposes. Councils that don't have an open licence could 
+        %a{ :href => "http://www.rbwm.gov.uk/web/finance_payments_to_suppliers.htm"}<
+          follow Windsor and Maidenhead's example
+        and adopt 
+        %a{ :href => "http://data.gov.uk/terms-and-conditions"}<
+          the data.gov.uk licence.
+        An open licence is essential to enable the maximum use of this data and allow it to be combined with data from other councils to enable comparisons and benchmarking.
+    %tr
+      %td.strong Machine readable?
+      %td
+        The data needs to be able to be pulled directly into a database or spreadsheet from the web, not just visible as a web page or document. Acceptable formats include CSV, JSON and XML. Unacceptable formats include PDF and Word documents which can't be directly loaded as data into another program. It is also unacceptable to use a word-verification 
+        %a{:href => "http://en.wikipedia.org/wiki/CAPTCHA"}<
+          CAPTCHA 
+        to prevent automated downloads.
+    %tr
+      %td.strong Start date
+      %td
+        The start of the period for which spending data is published.  
+    %tr
+      %td.strong End date
+      %td
+        The end of the period for which spending data is published.  
+    %tr
+      %td.strong Updated
+      %td
+        The date on which this scoreboard data was updated for this council. If you are concerned that your own council's data is out of date here, please 
+        %a{ :href => '/about' }<
+          get in touch. 
+        
