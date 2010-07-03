@@ -1,0 +1,26 @@
+.grid_12
+  %h2= @page_title = "Council Spending Data Scoreboard"
+  
+  %table
+    %tr
+      %th Council
+      %th Data URL
+      %th Open licence?
+      %th Machine readable?
+      %th Start
+      %th End
+      %th Updated
+      
+    - for council in @councils
+      %tr
+        %td
+          %a{ :href => council.url }
+            = council.name
+        %td
+          %a{ :href => council.data_url }
+            data
+        %td= yesno(council.open_licence)
+        %td= yesno(council.machine_readable)
+        %td= council.start_d.strftime("%b %Y")        
+        %td= council.end_d.strftime("%b %Y")        
+        %td= council.updated_at.strftime("%d %b %Y")

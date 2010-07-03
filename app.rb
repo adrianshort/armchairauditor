@@ -10,6 +10,10 @@ helpers do
   def commify(amount)
     amount.to_s.reverse.gsub(/(\d\d\d)(?=\d)(?!\d*\.)/,'\1,').reverse
   end
+  
+  def yesno(boolean)
+    boolean == true ? 'Yes' : 'No'
+  end
 end
 
 get '/' do
@@ -141,6 +145,11 @@ end
 
 get '/about' do
   haml :about
+end
+
+get '/scoreboard' do
+  @councils = Council.all( :order => ['name'] )
+  haml :scoreboard
 end
 
 not_found do

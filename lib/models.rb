@@ -88,5 +88,28 @@ class Supplier
   end
 end
 
+class Council
+  include DataMapper::Resource
+  
+  property :id,               Serial
+  property :created_at,       DateTime
+  property :updated_at,       DateTime
+  property :name,             String,   :length => 255, :required => true
+  property :slug,             String,   :length => 255
+  property :url,              String,   :length => 255
+  property :data_url,         String,   :length => 512
+  property :open_licence,     Boolean,  :default => false
+  property :machine_readable, Boolean,  :default => false
+  property :grade,            String,   :length => 1
+  property :start_d,          Date
+  property :end_d,            Date 
+  
+  before :save, :slugify
+
+  def slugify
+    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+  end 
+end
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db.sqlite3")
 DataMapper.auto_upgrade!
