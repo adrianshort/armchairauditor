@@ -4,6 +4,7 @@ require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-aggregates'
 require 'dm-serializer'
+require 'dm-migrations'
 
 SITE_URL = 'http://armchairauditor.co.uk/'
 
