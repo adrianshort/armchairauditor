@@ -25,7 +25,11 @@
 
 .grid_9 
 
-  %h3 Summary
+  %h3
+    Summary for
+    = nicedate(@d_start)
+    to
+    = nicedate(@d_end)
 
   %table
     %tr
@@ -42,7 +46,12 @@
       %td.right= commify(sprintf("&pound;%0d", @min))
       %td.right= commify(sprintf("&pound;%0d", @avg))
   
-  %h3 Suppliers by Spend
+  %h3
+    Suppliers by Spend for
+    = nicedate(@d_start)
+    to
+    = nicedate(@d_end)
+    
       
   %table
     %tr

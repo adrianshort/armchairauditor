@@ -18,8 +18,12 @@
     %a{ :href => "/suppliers/#{@supplier.slug}.csv" }
       Download data as CSV
 
-  %h3 Summary 
-  
+  %h3
+    Summary for
+    = nicedate(@d_start)
+    to
+    = nicedate(@d_end)
+
   %table
     %tr
       %th.right Payments

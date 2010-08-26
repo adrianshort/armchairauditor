@@ -14,6 +14,11 @@ helpers do
   def yesno(boolean)
     boolean == true ? 'Yes' : 'No'
   end
+  
+  def nicedate(d)
+    d.strftime("%d %b %Y")
+  end
+  
 end
 
 get '/' do
@@ -52,6 +57,8 @@ get '/suppliers/:slug' do
   @avg = @supplier.payments.avg(:amount)
   @max = @supplier.payments.max(:amount)
   @min = @supplier.payments.min(:amount)
+  @d_start = @supplier.payments.min(:d)
+  @d_end = @supplier.payments.max(:d)
   haml :supplier
 end
 
@@ -89,6 +96,8 @@ get '/services/:slug' do
   @avg = @service.payments.avg(:amount)
   @max = @service.payments.max(:amount)
   @min = @service.payments.min(:amount)
+  @d_start = @service.payments.min(:d)
+  @d_end = @service.payments.max(:d)
   
   @results = repository(:default).adapter.query("
     SELECT s.name AS supplier_name, s.slug AS supplier_slug, SUM(p.amount) AS total
