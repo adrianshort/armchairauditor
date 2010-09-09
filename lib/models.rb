@@ -6,8 +6,6 @@ require 'dm-aggregates'
 require 'dm-serializer'
 require 'dm-migrations'
 
-SITE_URL = 'http://armchairauditor.co.uk/'
-
 class Payment
   include DataMapper::Resource
   
@@ -17,14 +15,14 @@ class Payment
   property :service_id,     Integer,     :required => true
   property :supplier_id,    Integer,     :required => true
   property :amount,         BigDecimal,  :precision => 10, :scale => 2, :required => true # ex VAT
-  property :d,              Date,        :required => true # "Updated" in RBWM CSV files
+  property :d,              Date,        :required => true # transaction date
   
   belongs_to :service
   belongs_to :supplier
   has 1, :directorate, { :through => :service }
 
   def url
-    SITE_URL + "payments/" + @id.to_s
+    SETTING.site_url + "payments/" + @id.to_s
   end
 end
 
@@ -109,6 +107,21 @@ class Council
   def slugify
     @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
   end 
+end
+
+
+# This is a singleton. We only use the first row in the settings table.
+
+class Setting
+  include DataMapper::Resource
+  
+  property :id,               Serial
+  property :site_name,        String,   :length => 255, :required => true
+  property :site_tagline,     String,   :length => 255
+  property :site_url,         String,   :length => 255
+  property :org_name,         String,   :length => 255
+  property :org_url,          String,   :length => 255
+  property :data_url,         String,   :length => 255
 end
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db.sqlite3")

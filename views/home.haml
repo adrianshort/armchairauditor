@@ -7,7 +7,7 @@
 .clear
 
 .grid_6    
-  %h2 Council Directorates
+  %h2 Council Services
       
   - for directorate in @directorates
     %p
@@ -20,7 +20,10 @@
       Armchair Auditor lets you see how your council spends your money.
     
     %p
-      For the Royal Borough of Windsor and Maidenhead we've got:
+      For the
+      %a{ :href => "#{SETTING.org_url}" }<
+        = SETTING.org_name
+      we've got:
     %ul
       %li
         %a{ :href => "/services" }

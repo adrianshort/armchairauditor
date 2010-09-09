@@ -18,7 +18,20 @@ input
   background-color: #fff;
 }
 
+.tagline
+{
+  color: #777;
+  font-size: 60%;
+  padding-left: 20px;
+}
 
+.alpha
+{
+  font-size: 40%;
+  text-transform: uppercase;
+  vertical-align: top;
+  line-height: 100%;
+}
 
 #main
 {

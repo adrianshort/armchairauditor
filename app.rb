@@ -4,6 +4,8 @@ require 'sinatra-helpers/haml/partials'
 require 'haml'
 require 'lib/models'
 
+SETTING = Setting.first # Could also do this with Sinatra filters before/do
+
 PAYMENTS_FILTER_MIN = 1000
 
 helpers do
@@ -157,6 +159,7 @@ get '/about' do
 end
 
 get '/scoreboard.csv' do
+  halt 404
   @councils = Council.all( :order => ['name'] )
   labels = %w[
     id
@@ -181,6 +184,7 @@ get '/scoreboard.csv' do
 end
 
 get '/scoreboard' do
+  halt 404
   @councils = Council.all( :order => ['name'] )
   haml :scoreboard
 end

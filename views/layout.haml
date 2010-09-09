@@ -2,42 +2,39 @@
 !!!
 %html
   %head
-    %title= @page_title ? @page_title + " - Armchair Auditor" : "Armchair Auditor"
+    %title= @page_title ? @page_title + " - " + SETTING.site_name : SETTING.site_name
+
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/style.css' }
-    -#
-      %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/breadcrumb/breadcrumb.css' }
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css', :media => 'print' }
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/grid.css' }
-    %script{:type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'}
+
+    %script{:type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'}
     %script{:type => 'text/javascript', :src => '/js/jquery.cookie.js'}
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3042981-18']);
-    _gaq.push(['_trackPageview']);
-    
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>  
+
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3042981-18']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
   %body
     .container_12
       .grid_12
-        %p.highlight.hidden This is a demonstration website of &quot;alpha&quot; quality &mdash; don't rely on this data.
         %h1.logo
-          Armchair Auditor
-          %sup
-            %span{ :style => "font-size: 40%; text-transform: uppercase; vertical-align: top; line-height: 100%;" }
-              Alpha
-          %span{ :style => "color: #777; font-size: 60%; padding-left: 20px;" }
-            Royal Borough of Windsor &amp; Maidenhead Spending
+          = SETTING.site_name
+          -#
+            %span.tagline
+              = SETTING.site_tagline
         #nav.noprint
           %a{ :href => '/' } Home
           %a{ :href => '/services' } Services
           %a{ :href => '/suppliers' } Suppliers
-          %a{ :href => '/scoreboard' } Scoreboard
+          -#
+            %a{ :href => '/scoreboard' } Scoreboard
           %a{ :href => '/about' } About
       = yield
       .clear  
@@ -45,7 +42,7 @@
         .grid_12.top_border
           %p
             An independent website 
-            %a{ :href => 'http://twitter.com/AdrianShort' }<
+            %a{ :href => 'http://twitter.com/adrianshort' }<
               designed by Adrian Short
             &nbsp;&nbsp;&nbsp;
             %a{ :href => 'http://twitter.com/ArmchairAuditor' }<

@@ -1,5 +1,5 @@
 require 'lib/models'
-require 'csv'
+require 'fastercsv'
 
 # Before running this script with a CSV file, prepare it so:
 #   - There is only a single line of column headings on the first line of the file
@@ -44,7 +44,7 @@ if date_format != 'DMY' && date_format != 'MDY'
   exit
 end
 
-CSV::Reader.parse(File.open(ARGV[0], 'rb')) do |row|
+FasterCSV.foreach(ARGV[0]) do |row|
 
     count += 1
     
@@ -70,8 +70,11 @@ CSV::Reader.parse(File.open(ARGV[0], 'rb')) do |row|
       end
       
       directorate = Directorate.first_or_create(:name => directorate_name)
+      directorate.save
       service = Service.first_or_create(:name => service_name, :directorate => directorate)
+      service.save
       supplier = Supplier.first_or_create(:name => supplier_name)
+      supplier.save
       
       dt = row[columns['Updated']].strip.split('/')
 
