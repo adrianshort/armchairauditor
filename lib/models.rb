@@ -122,6 +122,7 @@ class Setting
   property :org_name,         String,   :length => 255
   property :org_url,          String,   :length => 255
   property :data_url,         String,   :length => 255
+  property :disqus_shortname, String,   :length => 255
 end
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db.sqlite3")

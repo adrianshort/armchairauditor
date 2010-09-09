@@ -24,17 +24,6 @@
       %td Amount &pound;
       %td= commify(sprintf("%0.2f", @payment.amount))
 .clear
-<div class="grid_9 noprint">
-= haml_partial "comment_header"
-<div id="disqus_thread" class="noprint"></div>
-<script type="text/javascript">
-var disqus_developer = 1;
-(function() {
-var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-dsq.src = 'http://armchairauditor.disqus.com/embed.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=armchairauditor">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink noprint">Comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+
+.grid_9.noprint
+  = haml_partial "disqus_comments"
