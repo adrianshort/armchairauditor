@@ -2,6 +2,7 @@
   %tr
     %th Date
     %th Ref.
+    %th Transaction
     %th Supplier
     %th.right &pound;
       
@@ -11,6 +12,7 @@
       %td.right
         %a{ :href => "/payments/#{payment.id}" }
           = payment.id
+      %td.right= payment.transaction_id
       %td
         %a{ :href => '/suppliers/' + payment.supplier.slug }
           = payment.supplier.name

@@ -45,6 +45,7 @@
     %tr
       %th Date
       %th Ref.
+      %th Transaction
       %th Directorate
       %th Service
       %th.right &pound;
@@ -55,9 +56,11 @@
         %td
           %a{ :href => "/payments/#{payment.id}" }
             = payment.id
+        %td= payment.transaction_id
         %td
-          %a{ :href => '/directorates/' + payment.service.directorate.slug }
-            = payment.service.directorate.name
+          - unless payment.service.directorate.nil?
+            %a{ :href => '/directorates/' + payment.service.directorate.slug }
+              = payment.service.directorate.name
         %td
           %a{ :href => '/services/' + payment.service.slug }
             = payment.service.name

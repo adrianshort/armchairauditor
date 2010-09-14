@@ -6,10 +6,14 @@
       %td Date
       %td= nicedate(@payment.d)
     %tr
-      %td Directorate
-      %td
-        %a{ :href => "/directorates/#{@payment.service.directorate.slug}" }
-          = @payment.service.directorate.name
+      %td Transaction
+      %td= @payment.transaction_id
+    - unless @payment.service.directorate.nil?
+      %tr
+        %td Directorate
+        %td
+          %a{ :href => "/directorates/#{@payment.service.directorate.slug}" }
+            = @payment.service.directorate.name
     %tr
       %td Service
       %td

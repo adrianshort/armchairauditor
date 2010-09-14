@@ -9,11 +9,12 @@
 
   %h2= @page_title = @service.name
   
-  %p
-    A service in the 
-    %a{ :href => '/directorates/' + @service.directorate.slug }
-      = @service.directorate.name
-      Directorate
+  - unless @service.directorate.nil?
+    %p
+      A service in the 
+      %a{ :href => '/directorates/' + @service.directorate.slug }
+        = @service.directorate.name
+        Directorate
 
   %p.noprint
     %a{ :href => "/services/#{@service.slug}/payments" }

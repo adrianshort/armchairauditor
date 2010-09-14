@@ -85,11 +85,11 @@ get '/services/:slug/payments.csv' do
   
 end
 
-get '/services/:slug.json' do
-  @service = Service.first(:slug => params[:slug])
-  headers "Content-Type" => "application/json"
-  @service.to_json(:relationships => { :payments => { :include => :all }, :directorate => { :include => :all } })
-end
+# get '/services/:slug.json' do
+#   @service = Service.first(:slug => params[:slug])
+#   headers "Content-Type" => "application/json"
+#   @service.to_json(:relationships => { :payments => { :include => :all }, :directorate => { :include => :all } })
+# end
 
 get '/services/:slug' do
   @service = Service.first(:slug => params[:slug])

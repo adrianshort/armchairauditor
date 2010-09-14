@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'datamapper'
 require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
@@ -16,6 +17,7 @@ class Payment
   property :supplier_id,    Integer,     :required => true
   property :amount,         BigDecimal,  :precision => 10, :scale => 2, :required => true # ex VAT
   property :d,              Date,        :required => true # transaction date
+  property :transaction_id, Integer      # May not be unique per payment as one transaction could have several payments
   
   belongs_to :service
   belongs_to :supplier
@@ -34,16 +36,17 @@ class Directorate
   property :created_at,   DateTime
   property :updated_at,   DateTime
   property :name,         String, :length => 255, :required => true
-  property :slug,         String, :length => 255
+  property :slug,         String, :length => 255, :required => true
   
   has n, :services, :order => ['name']
   has n, :suppliers, { :through => :services, :order => ['name'] }
 
-  before :save, :slugify
-
-  def slugify
-    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
-  end
+#   before :save, :slugify
+# 
+#   def slugify
+#     @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+#     puts "I've just been slugified"
+#   end
 end
 
 class Service
@@ -52,19 +55,20 @@ class Service
   property :id,             Serial
   property :created_at,     DateTime
   property :updated_at,     DateTime
-  property :directorate_id, Integer,  :required => true
+  property :directorate_id, Integer
   property :name,           String,   :length => 255, :required => true
-  property :slug,           String,   :length => 255
+  property :slug,           String,   :length => 255, :required => true
   
   has n, :payments, :order => ['d']
   has n, :suppliers, { :through => :payments, :order => ['name'] }
-  belongs_to :directorate
+  belongs_to :directorate, :required => false
 
-  before :save, :slugify
-
-  def slugify
-    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
-  end 
+#   before :save, :slugify
+# 
+#   def slugify
+#     @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+#     puts "I've just been slugified"
+#   end
 end
 
 class Supplier
@@ -74,17 +78,17 @@ class Supplier
   property :created_at, DateTime
   property :updated_at, DateTime
   property :name,       String, :length => 255, :required => true
-  property :slug,       String, :length => 255
+  property :slug,       String, :length => 255, :required => true
   
   has n, :payments, :order => ['d']
   has n, :services, { :through => :payments, :order => ['name'] }
   has n, :directorates, { :through => :payments }
   
-  before :save, :slugify
-
-  def slugify
-    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
-  end
+#   before :save, :slugify
+# 
+#   def slugify
+#     @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
+#   end
 end
 
 class Council
@@ -115,15 +119,17 @@ end
 class Setting
   include DataMapper::Resource
   
-  property :id,               Serial
-  property :site_name,        String,   :length => 255, :required => true
-  property :site_tagline,     String,   :length => 255
-  property :site_url,         String,   :length => 255
-  property :org_name,         String,   :length => 255
-  property :org_url,          String,   :length => 255
-  property :data_url,         String,   :length => 255
-  property :disqus_shortname, String,   :length => 255
+  property :id,                   Serial
+  property :site_name,            String,   :length => 255, :required => true
+  property :site_tagline,         String,   :length => 255
+  property :site_url,             String,   :length => 255
+  property :org_name,             String,   :length => 255
+  property :org_url,              String,   :length => 255
+  property :data_url,             String,   :length => 255
+  property :disqus_shortname,     String,   :length => 255
+  property :google_analytics_id,  String,   :length => 255
 end
 
+# DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://root@localhost/armchairauditor_sutton")
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db.sqlite3")
 DataMapper.auto_upgrade!
