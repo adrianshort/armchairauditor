@@ -1,96 +1,11 @@
 .grid_12
   %h2= @page_title = "Council Spending Data Scoreboard"
   
-  %p Which councils are publishing their spending data and how are they doing it?
-
-  %p.noprint.download
-    %a{ :href => "/scoreboard.csv" }
-      Download data as CSV
-
-  %table
-    %tr
-      %th Council
-      %th Data URL
-      %th Open licence?
-      %th Machine readable?
-      %th Start
-      %th End
-      %th Updated
-      
-    - for council in @councils
-      %tr
-        %td
-          %a{ :href => council.url }
-            = council.name
-        %td
-          %a{ :href => council.data_url }
-            data
-        %td= yesno(council.open_licence)
-        %td= yesno(council.machine_readable)
-        %td= council.start_d.strftime("%b %Y")        
-        %td= council.end_d.strftime("%b %Y")        
-        %td= nicedate(council.updated_at)
-  
-  %p.highlight.noprint
-    This scoreboard data is free for you to use according to the
-    %a{ :href => "http://creativecommons.org/licenses/by/3.0/"}<
-      Creative Commons Attribution 3.0 Unported Licence.
-    Please credit to 
-    %strong
-      Adrian Short/Armchair Auditor
-    and link back to
-    %a{ :href => "http://armchairauditor.co.uk/scoreboard" }<
-      http://armchairauditor.co.uk/scoreboard
-    where possible.
-  
-  %h3 Notes
-  
-  %p
-    If your council is publishing spending data please be aware of the guidance from  
-    %a{ :href => "http://opengovernmentdata.org/finances/"}<
-      Open Government Data
-    and the
-    %a{ :href => "http://data.gov.uk/blog/publishing-itemised-local-authority-expenditure-advice-comment"}<
-      Local Public Data Panel.
-    You can ask questions and get support in the 
-    %a{ :href => "http://www.communities.idea.gov.uk/c/3916997/home.do" }<
-      Local Open Data Community
-    on Communities of Practice for Local Government (approved registration required.)
-  
-  %table
-    %tr
-      %td.strong Data URL
-      %td
-        A web page that links to the various downloadable data files.
-    %tr
-      %td.strong Open licence?
-      %td
-        If Yes, the council is explicitly stating an open licence which allows people to use and republish the data, including for commercial purposes. Councils that don't have an open licence could 
-        %a{ :href => "http://www.rbwm.gov.uk/web/finance_payments_to_suppliers.htm"}<
-          follow Windsor and Maidenhead's example
-        and adopt 
-        %a{ :href => "http://data.gov.uk/terms-and-conditions"}<
-          the data.gov.uk licence.
-        An open licence is essential to enable the maximum use of this data and allow it to be combined with data from other councils to enable comparisons and benchmarking.
-    %tr
-      %td.strong Machine readable?
-      %td
-        The data needs to be able to be pulled directly into a database or spreadsheet from the web, not just visible as a web page or document. Acceptable formats include CSV, JSON and XML. Unacceptable formats include PDF and Word documents which can't be directly loaded as data into another program. It is also unacceptable to use a word-verification 
-        %a{:href => "http://en.wikipedia.org/wiki/CAPTCHA"}<
-          CAPTCHA 
-        to prevent automated downloads.
-    %tr
-      %td.strong Start
-      %td
-        The start of the period for which spending data is published.  
-    %tr
-      %td.strong End
-      %td
-        The end of the period for which spending data is published.  
-    %tr
-      %td.strong Updated
-      %td
-        The date on which this scoreboard data was updated for this council. If you are concerned that your own council's data is out of date here, please 
-        %a{ :href => '/about' }<
-          get in touch. 
-        
+  %p Data on which councils are publishing their spending data and how they're doing it:
+  %ul
+    %li
+      %a{ :href => "https://spreadsheets.google.com/ccc?key=0AhOqra7su40fdEgtaG4yVFZGVjdYREVIWmprX2dENkE&hl=en_GB#gid=3" }<
+        Local council spending data scoreboard by OpenlyLocal.com
+    %li
+      %a{ :href => "http://www.guardian.co.uk/news/datablog/2010/sep/10/local-council-spending-over-500-list" }<
+        Council spending data from The Guardian Datablog      

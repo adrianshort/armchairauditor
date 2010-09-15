@@ -91,28 +91,6 @@ class Supplier
 #   end
 end
 
-class Council
-  include DataMapper::Resource
-  
-  property :id,               Serial
-  property :created_at,       DateTime
-  property :updated_at,       DateTime
-  property :name,             String,   :length => 255, :required => true
-  property :slug,             String,   :length => 255
-  property :url,              String,   :length => 255
-  property :data_url,         String,   :length => 512
-  property :open_licence,     Boolean,  :default => false
-  property :machine_readable, Boolean,  :default => false
-  property :start_d,          Date
-  property :end_d,            Date 
-  
-  before :save, :slugify
-
-  def slugify
-    @slug = @name.gsub(/[^\w\s-]/, '').gsub(/\s+/, '-').downcase
-  end 
-end
-
 
 # This is a singleton. We only use the first row in the settings table.
 
