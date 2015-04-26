@@ -27,7 +27,7 @@
       .grid_12
         %h1.logo
           = SETTING.site_name
-          -#
+          - if SETTING.site_tagline
             %span.tagline
               = SETTING.site_tagline
         #nav.noprint
