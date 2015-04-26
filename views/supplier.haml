@@ -75,6 +75,4 @@
       %td.right= commify(sprintf("%0d", @total))
       
 .clear
-
-.grid_9.noprint
-  = haml_partial "disqus_comments"
+= haml :_disqus_comments

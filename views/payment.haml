@@ -28,6 +28,4 @@
       %td Amount &pound;
       %td= commify(sprintf("%0.2f", @payment.amount))
 .clear
-
-.grid_9.noprint
-  = haml_partial "disqus_comments"
+= haml :_disqus_comments

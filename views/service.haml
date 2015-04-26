@@ -68,6 +68,4 @@
         %td.right= sprintf("%0.1f", row['total'] / @total * 100)
   
 .clear
-
-.grid_9.noprint
-  = haml_partial "disqus_comments"
+= haml :_disqus_comments
