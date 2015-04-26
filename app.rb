@@ -1,6 +1,6 @@
 require 'sinatra'
 # require 'sinatra-helpers/haml/partials'
-require 'haml'
+require 'tilt/haml'
 require 'data_mapper'
 require './models'
 
