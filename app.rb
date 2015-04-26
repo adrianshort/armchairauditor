@@ -28,7 +28,7 @@ get '/' do
   @payments_count = Payment.count
   @suppliers_count = Supplier.count 
   @services_count = Service.count
-  haml :home
+  haml :index
 end
 
 get '/directorates/:slug' do
