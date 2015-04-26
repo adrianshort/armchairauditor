@@ -1,5 +1,6 @@
-require './models'
-require 'fastercsv'
+require './app'
+require 'csv'
+require 'date'
 
 # Before running this script with a CSV file, prepare it so:
 #   - There is only a single line of column headings on the first line of the file
@@ -39,7 +40,7 @@ if ARGV[0].nil?
   exit
 end
 
-FasterCSV.foreach(ARGV[0]) do |row|
+CSV.foreach(ARGV[0]) do |row|
 
     count += 1
     
@@ -80,8 +81,13 @@ FasterCSV.foreach(ARGV[0]) do |row|
       supplier = Supplier.first_or_create(:name => supplier_name, :slug => slugify(supplier_name))
       supplier.save
       
-      dt = row[columns['Updated']].strip.split(' ')
-      d = Date.new(dt[2].to_i, months.index(dt[1]), dt[0].to_i)
+      # dt = row[columns['Updated']].strip.split(' ')
+      # d = Date.new(dt[2].to_i, months.index(dt[1]), dt[0].to_i)
+
+      dt = row[columns['Updated']].strip
+      if dt =~ /\d{4}-\d{2}-\d{2}/
+        d = Date.iso8601(dt)
+      end
 
       # Using Payment.new rather than Payment.first_or_new allows us to create genuine duplicates
       # so don't run the importer more than once with the same set of data
