@@ -1,4 +1,4 @@
-require 'lib/models'
+require './models'
 require 'fastercsv'
 
 # Before running this script with a CSV file, prepare it so:
