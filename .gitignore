@@ -1,3 +1,4 @@
 data/
 *sqlite3
-
+.ruby-version
+.ruby-gemset
