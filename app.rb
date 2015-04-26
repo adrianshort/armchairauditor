@@ -158,14 +158,6 @@ get '/about' do
   haml :about
 end
 
-get '/scoreboard.csv' do
-  redirect '/scoreboard'
-end
-
-get '/scoreboard' do
-  haml :scoreboard
-end
-
 not_found do
   haml :not_found
 end
