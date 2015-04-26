@@ -6,7 +6,7 @@ class Payment
   property :updated_at,     DateTime
   property :service_id,     Integer,     :required => true
   property :supplier_id,    Integer,     :required => true
-  property :amount,         BigDecimal,  :precision => 10, :scale => 2, :required => true # ex VAT
+  property :amount,         Decimal,     :precision => 10, :scale => 2, :required => true # ex VAT
   property :d,              Date,        :required => true # transaction date
   property :transaction_id, Integer      # May not be unique per payment as one transaction could have several payments
   
