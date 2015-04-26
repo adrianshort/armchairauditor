@@ -1,8 +1,8 @@
-require 'rubygems'
 require 'sinatra'
-require 'sinatra-helpers/haml/partials'
+# require 'sinatra-helpers/haml/partials'
 require 'haml'
-require 'lib/models'
+require 'data_mapper'
+require './models'
 
 SETTING = Setting.first # Could also do this with Sinatra filters before/do
 

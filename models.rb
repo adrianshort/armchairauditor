@@ -1,12 +1,3 @@
-require 'rubygems'
-require 'datamapper'
-require 'dm-core'
-require 'dm-validations'
-require 'dm-timestamps'
-require 'dm-aggregates'
-require 'dm-serializer'
-require 'dm-migrations'
-
 class Payment
   include DataMapper::Resource
   
