@@ -100,7 +100,7 @@ get '/services/:slug' do
   @d_start = @service.payments.min(:d)
   @d_end = @service.payments.max(:d)
   
-  @results = repository(:default).adapter.query("
+  @results = repository(:default).adapter.select("
     SELECT s.name AS supplier_name, s.slug AS supplier_slug, SUM(p.amount) AS total
     FROM payments p, suppliers s
     WHERE p.supplier_id = s.id
