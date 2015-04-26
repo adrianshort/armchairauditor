@@ -154,9 +154,9 @@ get '/error' do
   haml :error
 end
 
-get '/about' do
-  haml :about
-end
+# get '/about' do
+#   haml :about
+# end
 
 not_found do
   haml :not_found
